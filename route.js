@@ -118,22 +118,19 @@ export async function GET(request) {
 
     return Response.json(payload);
   } catch (error) {
-    return Response.json(
-      {
-        ok: false,
-        error: "DAILY_TEXT_PARSE_FAILED",
-        message:
-          "Today's test is unavailable. Please view the daily text directly on wol.jw.org.",
-        sourceUrl: WOL_BASE + LANGUAGE_MAP[lang].path,
-        debug:
-          String(error?.message || error)
-          //process.env.NODE_ENV === "development"
-            //? String(error?.message || error)
-           // : undefined
-      },
-      { status: 502 }
-    );
-  }
+  return Response.json(
+    {
+      ok: false,
+      error: "DAILY_TEXT_PARSE_FAILED",
+      message:
+        "Today's test is unavailable. Please view the daily text directly on wol.jw.org.",
+      sourceUrl: WOL_BASE + LANGUAGE_MAP[lang].path,
+      debug: String(error?.message || error),
+      stack: String(error?.stack || "")
+    },
+    { status: 502 }
+  );
+}
 }
 
 export async function fetchDailyTest({ lang = "en", targetDate = null }) {
