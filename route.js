@@ -126,9 +126,10 @@ export async function GET(request) {
           "Today's test is unavailable. Please view the daily text directly on wol.jw.org.",
         sourceUrl: WOL_BASE + LANGUAGE_MAP[lang].path,
         debug:
-          process.env.NODE_ENV === "development"
-            ? String(error?.message || error)
-            : undefined
+          String(error?.message || error)
+          //process.env.NODE_ENV === "development"
+            //? String(error?.message || error)
+           // : undefined
       },
       { status: 502 }
     );
